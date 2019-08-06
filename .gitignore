@@ -1,0 +1,5 @@
+orthanc_testdata
+data
+models_weights/*
+temp/*
+data*
