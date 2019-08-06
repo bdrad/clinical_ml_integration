@@ -30,7 +30,7 @@ cd clinical_ml_integration
 ```
 
 2. Install dependencies
-```python
+```bash
 conda create --name “clinical_integration”
 source activate clinical_integration
 pip install -r requirements.txt
@@ -184,7 +184,7 @@ def model(study, ml_series_uid):
   ```
   **`responses` must be an empty list or list of values returned from `upload_dicom_file`**
 
-1. **If `auto_upload = True` in config.py, then that's all you need to upload a new model!** If `auto_upload = False`, the script will analyze the image and upload to Orthanc. However, if you want to transmit to your PACS, you must (1) open up Orthanc browser (http://localhost:8042), (2) find the relevant study and DICOM file, (3) use the Orthanc GUI to "Send to remote modality" and select your PACS. 
+1. **If `auto_upload = True` in config.py, then that's all you need to upload a new model!** If `auto_upload = False`, the script will analyze the image and upload to Orthanc. However, if you want to transmit to your PACS, you must (1) open up Orthanc browser (http://localhost:8042), (2) find the relevant study and DICOM file, (3) use the Orthanc GUI to "Send to remote modality" and select your PACS.
 
 ## Administrative/Deployment Tips
 - Setup a test PACS environment that mimics your real PACS for testing
