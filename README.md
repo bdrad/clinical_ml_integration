@@ -144,7 +144,7 @@ def model(study, ml_series_uid):
               pred = model.predict(img)
 
               # postprocessing to convert output into legible string
-              ## Example: pred_processed
+              ## Example: pred_processed = 'Series 1: Class B (89%)'
               pred_processed = postprocess(img)
 
       # Combine output of each image into a single image
