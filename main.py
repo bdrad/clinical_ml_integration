@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Tue Jun 11 09:29:03 2019
+Main file for "Clinical Integration of Machine Learning Models in Hospital PACS"
 
-@author: Yesh
+https://github.com/bdrad/clinical_ml_integration
 
 ## COMMANDS
 python main.py
 
-
 """
-import time
+
 from utils import get_changes, get_study, transmit_file
 from utils import get_ML_series, delete_study
+import config
+
+import time
 from keras import backend as K
 from os.path import dirname, basename, isfile, join
 import glob
@@ -62,12 +64,13 @@ while True:
                 K.clear_session()
                 for response in responses:
                     if response.get('Status') == 'Success':
-                        transmission = transmit_file(response['ID'], remote='MAM')
-
-
+                        if config.auto_transmit:
+                            transmission = transmit_file(response['ID'], remote=config.remote)
 
             print('COMPLETED PROCESSING STUDY: ' + item['ID'])
-#            delete_study(item['ID']) # TODO: uncomment if you want the study to remain on Orthanc/DICOM server
+            
+            if config.auto_transmit and config.delete_after_transmit:
+                delete_study(item['ID'])
 
 
     n_last = changes['Last']

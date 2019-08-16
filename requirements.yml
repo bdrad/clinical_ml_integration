@@ -1,0 +1,17 @@
+name: clinical_integration
+channels:
+  - anaconda
+  - conda-forge
+  - defaults
+dependencies:
+  - pillow=5.3.0=py36hb68e598_0
+  - gdcm=2.8.9=py36h95c2286_0
+  - pydicom=1.2.2=py_0
+  - tensorflow=1.5.1=py36_0
+  - numpy=1.12.1=py36h8871d66_1
+  - numpy-base=1.15.0=py36h1bbf6aa_0
+  - requests=2.22.0=py36_1
+  - pip:
+    - keras==2.2.4
+    - opencv-python==3.4.4.19
+

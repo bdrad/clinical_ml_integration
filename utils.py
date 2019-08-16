@@ -9,7 +9,6 @@ Created on Mon Jun 10 14:10:06 2019
 import os
 import numpy as np
 import requests
-import gdcm
 from pydicom import dcmread
 from pydicom.filebase import DicomBytesIO
 from PIL import Image, ImageDraw, ImageFont

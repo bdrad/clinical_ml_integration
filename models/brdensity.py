@@ -57,7 +57,7 @@ def create_output_img(ds, text_lines):
 ###################################################
 
 def model(study, ml_series_uid):
-    model_name = 'brdensity'
+    model_name = 'BI-RADS Density Demo'
     print('Apply BI-RADS Breast Density Classifiction to study')
 
     # 1. Check headers
@@ -65,15 +65,15 @@ def model(study, ml_series_uid):
         return []
 
     # 2. Load Model
-    fp_model = './models_weights/brdensity/xcep_aug_e500_8.h5'
-    model = load_model(fp_model, compile=False)
-    _, h, w, c = model.layers[0].input_shape
+    def dummy_model(img):
+        return [0, 0, 0, 0, 1]
+    h, w, c = 224, 224, 1
 
     y_preds = []
     instance_names = []
     instance_labels = []
     instance_conf = []
-    density_labels = ['A', 'B', 'C', 'D']
+    density_labels = ['A', 'B', 'C', 'D', 'TEST DENSITY']
 
     responses = []
     for series_id in study['Series']:
@@ -95,10 +95,10 @@ def model(study, ml_series_uid):
             img = (img - np.mean(img)) / np.std(img)
             img = np.expand_dims(img, axis=0)
 
-            y_pred = model.predict(img)[0]
+            y_pred = dummy_model(img)
 
             pred_idx = np.argmax(y_pred)
-
+            
             instance_names.append(ds.SeriesDescription)
             instance_labels.append(density_labels[pred_idx])
             instance_conf.append(y_pred[pred_idx])
@@ -132,17 +132,9 @@ def model(study, ml_series_uid):
     ds = update_ML_dicom(ds, model_name, ml_series_uid)
     ds = update_pixels(ds, img)
 
-    # upload
+    # upload & append
     r = upload_dicom_file(ds) # upload new edited dicom
-
     responses.append(r)
 
     return responses
 
-
-
-
-
-if __name__ == '__main__':
-    from utils import get_series
-    series = get_series('b1ce52ea-b7144d3d-a2f3d532-bd05f7ac-6ae96745')

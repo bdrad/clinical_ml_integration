@@ -29,18 +29,17 @@ git clone https://github.com/bdrad/clinical_ml_integration.git
 cd clinical_ml_integration
 ```
 
-2. Install dependencies
+2. Create environment and install dependencies
 ```bash
-conda create --name “clinical_integration”
+conda env create -f requirements.yml
 source activate clinical_integration
-pip install -r requirements.txt
 ```
 
 3. Edit config.py
 ```python
-remote = ‘PACS’ # specify PACS alias where ML analysis will be sent. This should match alias in Configuration.json
-delete_after_upload = False # Set to True to automatically delete study after uploading analysis to the remote
-auto_upload = True # Set to False if you want to manually upload ML analysis to PACS
+remote = 'PACS' # specify PACS alias where ML analysis will be sent. This should match alias in Configuration.json
+auto_transmit = False # Set to True to automaticall transmit to remote
+delete_after_transmit = False # Set to True to automatically delete study after transmitting analysis to the remote
 ```
 
 ## Starting the Clinical ML Integration Server
