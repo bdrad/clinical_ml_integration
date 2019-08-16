@@ -45,10 +45,6 @@ def create_output_img(ds, text_lines):
     img = add_labels(img_bg, text_lines, fontsize=ds.Columns//30, xy=xy)
     img = img // img.max() * int(ds.pixel_array.max()) # set to the text pixel value to the max of the mammo
 
-#    import matplotlib.pyplot as plt
-#    plt.imshow(img)
-#    plt.savefig(fname='temp/test.png',dpi=600)
-
     return img
 
 

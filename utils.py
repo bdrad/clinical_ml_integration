@@ -5,16 +5,16 @@ Created on Mon Jun 10 14:10:06 2019
 
 @author: Yesh
 """
-# import os; os.chdir('/Users/Yesh/Documents/BDRAD/clinical_integration')
 import os
 import numpy as np
 import requests
 from pydicom import dcmread
 from pydicom.filebase import DicomBytesIO
 from PIL import Image, ImageDraw, ImageFont
+import config
 
 
-BASE = 'http://localhost:8042/'
+BASE = config.ORTHANC
 print(BASE)
 
 ## BASIC GET FUNCTIONS
@@ -116,9 +116,8 @@ def read_dcm(instance_id):
 # UID GENERATORS AND FETCHERS
 # AND UPDATING DICOM
 ####################################
-ml_series_description = 'ML_models'
 
-def get_ML_series(study_id, ml_series_description=ml_series_description):
+def get_ML_series(study_id, ml_series_description=config.ML_SERIES_DESCRIPTION):
     # check if any AI series already exists with match Series Description
     # if not, gen new uid and return that
     series_all = get_series_in_study(study_id)
@@ -137,7 +136,7 @@ def get_ML_series(study_id, ml_series_description=ml_series_description):
 
 
 
-def update_ML_dicom(ds, model_name, ml_series_uid, ml_series_description=ml_series_description):
+def update_ML_dicom(ds, model_name, ml_series_uid, ml_series_description=config.ML_SERIES_DESCRIPTION):
     # set model name
     ds.ManufacturerModelName = model_name
 

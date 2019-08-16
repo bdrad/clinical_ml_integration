@@ -64,12 +64,12 @@ while True:
                 K.clear_session()
                 for response in responses:
                     if response.get('Status') == 'Success':
-                        if config.auto_transmit:
-                            transmission = transmit_file(response['ID'], remote=config.remote)
+                        if config.AUTO_TRANSMIT:
+                            transmission = transmit_file(response['ID'], remote=config.REMOTE)
 
             print('COMPLETED PROCESSING STUDY: ' + item['ID'])
             
-            if config.auto_transmit and config.delete_after_transmit:
+            if config.AUTO_TRANSMIT and config.DELETE_AFTER_TRANSMIT:
                 delete_study(item['ID'])
 
 
