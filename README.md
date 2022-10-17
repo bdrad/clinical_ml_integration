@@ -193,3 +193,5 @@ def model(study, ml_series_uid):
 
 ## Reference
 Please cite this repository in projects using this approach, until the paper is published. Once paper is available, please cite the paper.
+
+The paper can be found using the DOI: https://doi.org/10.1007/s10278-020-00348-8
